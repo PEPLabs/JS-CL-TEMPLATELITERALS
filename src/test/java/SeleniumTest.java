@@ -4,66 +4,42 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.JavascriptExecutor;
 
-public class TemplateLiteralsTest {
+public class SeleniumTest {
 
     private static WebDriver webDriver;
 
-    @BeforeAll
+    @BeforeEach
     public static void setUp() {
-        String browserName = BrowserUtils.getWebDriverName();
+       
+        // Set up ChromeDriver path
+        System.setProperty("webdriver.chrome.driver", "driver/chromedriver");//linux_64
 
-        // debugging statement
-        System.out.println(browserName);
-
-        switch (browserName) {
-            case "chrome":
-                WebDriverManager.chromedriver().setup();
-                ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("headless");
-                webDriver = new ChromeDriver(chromeOptions);
-                break;
-
-            case "firefox":
-                WebDriverManager.firefoxdriver().setup();
-                FirefoxOptions firefoxOptions = new FirefoxOptions();
-                firefoxOptions.addArguments("-headless");
-                webDriver = new FirefoxDriver(firefoxOptions);
-                break;
-
-            case "edge":
-                WebDriverManager.edgedriver().setup();
-                EdgeOptions edgeOptions = new EdgeOptions();
-                edgeOptions.addArguments("--headless");
-                webDriver = new EdgeDriver(edgeOptions);
-                break;
-
-            case "ie":
-                WebDriverManager.iedriver().setup();
-                InternetExplorerOptions ieOptions = new InternetExplorerOptions();
-                ieOptions.addCommandSwitches("-headless");
-                webDriver = new InternetExplorerDriver(ieOptions);
-                break;
-
-            default:
-                throw new IllegalArgumentException("Unsupported browser: " + browserName);
-        }
-    
+        // Get file
         File file = new File("src/main/java/index.html");
         String path = "file://" + file.getAbsolutePath();
+
+        // Create a new ChromeDriver instance
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("headless");
+        webDriver = new ChromeDriver(options);
+
+        // Open the HTML file
         webDriver.get(path);
+        
+    }
+
+     @AfterEach
+    public void tearDown() {
+       
+            webDriver.quit();    
     }
 
 
@@ -144,51 +120,18 @@ public class TemplateLiteralsTest {
     }
 }
 
-class TestingUtils {
-    public static String getContent() {
-        String content = "";
-        try {
-            content = Files.readString(Paths.get("./src/main/java/index.js"));
-        } catch(IOException e){
-            e.printStackTrace();
-        }
+// class TestingUtils {
+//     public static String getContent() {
+//         String content = "";
+//         try {
+//             content = Files.readString(Paths.get("./src/main/java/index.js"));
+//         } catch(IOException e){
+//             e.printStackTrace();
+//         }
 
-        System.out.println(content);
-        return content;
-    }
-}
+//         System.out.println(content);
+//         return content;
+//     }
+// }
 
-
-class BrowserUtils {
-    public static String getWebDriverName() {
-        String[] browsers = { "chrome", "firefox", "edge", "ie" };
-
-        for (String browser : browsers) {
-            try {
-                switch (browser) {
-                    case "chrome":
-                        WebDriverManager.chromedriver().setup();
-                        new ChromeDriver().quit();
-                        break;
-                    case "firefox":
-                        WebDriverManager.firefoxdriver().setup();
-                        new FirefoxDriver().quit();
-                        break;
-                    case "edge":
-                        WebDriverManager.edgedriver().setup();
-                        new EdgeDriver().quit();
-                        break;
-                    case "ie":
-                        WebDriverManager.iedriver().setup();
-                        new InternetExplorerDriver().quit();
-                        break;
-                }
-                return browser;
-            } catch (Exception e) {
-                continue;
-            }
-        }
-        return "Unsupported Browser";
-    }
-}
 
