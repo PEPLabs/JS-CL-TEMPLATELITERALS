@@ -120,18 +120,18 @@ public class SeleniumTest {
     }
 }
 
-// class TestingUtils {
-//     public static String getContent() {
-//         String content = "";
-//         try {
-//             content = Files.readString(Paths.get("./src/main/java/index.js"));
-//         } catch(IOException e){
-//             e.printStackTrace();
-//         }
+class TestingUtils {
+    public static String getContent() {
+        String content = "";
+        try {
+            content = Files.readString(Paths.get("./src/main/java/index.js"));
+        } catch(IOException e){
+            e.printStackTrace();
+        }
 
-//         System.out.println(content);
-//         return content;
-//     }
-// }
+        System.out.println(content);
+        return content;
+    }
+}
 
 
