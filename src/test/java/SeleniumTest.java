@@ -17,7 +17,7 @@ public class SeleniumTest {
     private static WebDriver webDriver;
 
     @BeforeEach
-    public static void setUp() {
+    public void setUp() {
        
         // Set up ChromeDriver path
         System.setProperty("webdriver.chrome.driver", "driver/chromedriver");//linux_64
