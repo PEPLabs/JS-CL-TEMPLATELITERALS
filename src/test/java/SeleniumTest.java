@@ -1,13 +1,9 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -28,8 +24,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.openqa.selenium.WebElement;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class SeleniumTest {
 
@@ -108,7 +104,7 @@ public class SeleniumTest {
     JavascriptExecutor jsExecutor = (JavascriptExecutor) webDriver;
     String actual = (String) jsExecutor.executeScript("return exercise1(arguments[0]);", "Bobby");
     String expected = "hey bobby,";
-    Assertions.assertEquals(expected, actual.toLowerCase());
+    assertEquals(expected, actual.toLowerCase());
   }
 
   @Test
@@ -116,7 +112,7 @@ public class SeleniumTest {
     JavascriptExecutor jsExecutor = (JavascriptExecutor) webDriver;
     String actual = (String) jsExecutor.executeScript("return exercise1(arguments[0]);", "Charlie");
     String expected = "hey charlie,";
-    Assertions.assertEquals(expected, actual.toLowerCase());
+    assertEquals(expected, actual.toLowerCase());
   }
 
   @Test
@@ -125,10 +121,10 @@ public class SeleniumTest {
     String actual = (String) jsExecutor.executeScript("return exercise2(arguments[0], arguments[1], arguments[2]);",
         "grand", "read books", "fabulous");
 
-    Assertions.assertTrue(
+    assertTrue(
         actual.toLowerCase().trim().contains("i just wanted to take a moment to tell you how grand you are!"));
-    Assertions.assertTrue(actual.toLowerCase().trim().contains("remember that time we read books together?"));
-    Assertions.assertTrue(actual.toLowerCase().trim().contains("that was fabulous! we need to do it again soon."));
+    assertTrue(actual.toLowerCase().trim().contains("remember that time we read books together?"));
+    assertTrue(actual.toLowerCase().trim().contains("that was fabulous! we need to do it again soon."));
   }
 
   @Test
@@ -137,10 +133,10 @@ public class SeleniumTest {
     String actual = (String) jsExecutor.executeScript("return exercise2(arguments[0], arguments[1], arguments[2]);",
         "pretty", "drove motorcycles", "chill");
 
-    Assertions.assertTrue(
+    assertTrue(
         actual.toLowerCase().trim().contains("i just wanted to take a moment to tell you how pretty you are!"));
-    Assertions.assertTrue(actual.toLowerCase().trim().contains("remember that time we drove motorcycles together?"));
-    Assertions.assertTrue(actual.toLowerCase().trim().contains("that was chill! we need to do it again soon."));
+    assertTrue(actual.toLowerCase().trim().contains("remember that time we drove motorcycles together?"));
+    assertTrue(actual.toLowerCase().trim().contains("that was chill! we need to do it again soon."));
   }
 
   @Test
@@ -148,7 +144,7 @@ public class SeleniumTest {
     JavascriptExecutor jsExecutor = (JavascriptExecutor) webDriver;
     String actual = (String) jsExecutor.executeScript("return exercise3(arguments[0]);", "fantastic");
 
-    Assertions.assertEquals("i hOpE YoU'Re hAvInG A fAnTaStIc DaY!", actual.trim());
+    assertEquals("i hOpE YoU'Re hAvInG A fAnTaStIc DaY!", actual.trim());
   }
 
   @Test
@@ -156,31 +152,31 @@ public class SeleniumTest {
     JavascriptExecutor jsExecutor = (JavascriptExecutor) webDriver;
     String actual = (String) jsExecutor.executeScript("return exercise3(arguments[0]);", "good");
 
-    Assertions.assertEquals("i hOpE YoU'Re hAvInG A gOoD DaY!", actual.trim());
+    assertEquals("i hOpE YoU'Re hAvInG A gOoD DaY!", actual.trim());
   }
 
   @Test
   public void testForTemplateLiterals1() {
     String jsCode = TestingUtils.getContent().toLowerCase();
 
-    Assertions.assertTrue(jsCode.contains("`hey ${"));
-    Assertions.assertTrue(jsCode.contains("},`"));
+    assertTrue(jsCode.contains("`hey ${"));
+    assertTrue(jsCode.contains("},`"));
   }
 
   @Test
   public void testForTemplateLiterals2() {
     String jsCode = TestingUtils.getContent().toLowerCase();
 
-    Assertions.assertTrue(jsCode.contains("`i just wanted to take"));
-    Assertions.assertTrue(jsCode.contains("do it again soon.`"));
+    assertTrue(jsCode.contains("`i just wanted to take"));
+    assertTrue(jsCode.contains("do it again soon.`"));
   }
 
   @Test
   public void testForTemplateLiterals3() {
     String jsCode = TestingUtils.getContent().toLowerCase();
 
-    Assertions.assertTrue(jsCode.contains("`i hope "));
-    Assertions.assertTrue(jsCode.contains("day!`"));
+    assertTrue(jsCode.contains("`i hope "));
+    assertTrue(jsCode.contains("day!`"));
   }
 
   private void printEnvironmentInfo() {
