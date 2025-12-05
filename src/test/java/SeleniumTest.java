@@ -2,8 +2,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -24,8 +24,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.openqa.selenium.WebElement;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.Assertions;
 
 public class SeleniumTest {
 
@@ -55,7 +54,7 @@ public class SeleniumTest {
     }
   }
 
-  @Before
+  @BeforeEach
   public void setUp() {
     try {
       printEnvironmentInfo();
@@ -92,7 +91,7 @@ public class SeleniumTest {
     }
   }
 
-  @After
+  @AfterEach
   public void tearDown() {
     System.out.println("\n=== TEARDOWN ===");
     cleanup();
@@ -104,7 +103,7 @@ public class SeleniumTest {
     JavascriptExecutor jsExecutor = (JavascriptExecutor) webDriver;
     String actual = (String) jsExecutor.executeScript("return exercise1(arguments[0]);", "Bobby");
     String expected = "hey bobby,";
-    assertEquals(expected, actual.toLowerCase());
+    Assertions.assertEquals(expected, actual.toLowerCase());
   }
 
   @Test
@@ -112,7 +111,7 @@ public class SeleniumTest {
     JavascriptExecutor jsExecutor = (JavascriptExecutor) webDriver;
     String actual = (String) jsExecutor.executeScript("return exercise1(arguments[0]);", "Charlie");
     String expected = "hey charlie,";
-    assertEquals(expected, actual.toLowerCase());
+    Assertions.assertEquals(expected, actual.toLowerCase());
   }
 
   @Test
@@ -121,10 +120,10 @@ public class SeleniumTest {
     String actual = (String) jsExecutor.executeScript("return exercise2(arguments[0], arguments[1], arguments[2]);",
         "grand", "read books", "fabulous");
 
-    assertTrue(
+    Assertions.assertTrue(
         actual.toLowerCase().trim().contains("i just wanted to take a moment to tell you how grand you are!"));
-    assertTrue(actual.toLowerCase().trim().contains("remember that time we read books together?"));
-    assertTrue(actual.toLowerCase().trim().contains("that was fabulous! we need to do it again soon."));
+    Assertions.assertTrue(actual.toLowerCase().trim().contains("remember that time we read books together?"));
+    Assertions.assertTrue(actual.toLowerCase().trim().contains("that was fabulous! we need to do it again soon."));
   }
 
   @Test
@@ -133,10 +132,10 @@ public class SeleniumTest {
     String actual = (String) jsExecutor.executeScript("return exercise2(arguments[0], arguments[1], arguments[2]);",
         "pretty", "drove motorcycles", "chill");
 
-    assertTrue(
+    Assertions.assertTrue(
         actual.toLowerCase().trim().contains("i just wanted to take a moment to tell you how pretty you are!"));
-    assertTrue(actual.toLowerCase().trim().contains("remember that time we drove motorcycles together?"));
-    assertTrue(actual.toLowerCase().trim().contains("that was chill! we need to do it again soon."));
+    Assertions.assertTrue(actual.toLowerCase().trim().contains("remember that time we drove motorcycles together?"));
+    Assertions.assertTrue(actual.toLowerCase().trim().contains("that was chill! we need to do it again soon."));
   }
 
   @Test
@@ -144,7 +143,7 @@ public class SeleniumTest {
     JavascriptExecutor jsExecutor = (JavascriptExecutor) webDriver;
     String actual = (String) jsExecutor.executeScript("return exercise3(arguments[0]);", "fantastic");
 
-    assertEquals("i hOpE YoU'Re hAvInG A fAnTaStIc DaY!", actual.trim());
+    Assertions.assertEquals("i hOpE YoU'Re hAvInG A fAnTaStIc DaY!", actual.trim());
   }
 
   @Test
@@ -152,31 +151,31 @@ public class SeleniumTest {
     JavascriptExecutor jsExecutor = (JavascriptExecutor) webDriver;
     String actual = (String) jsExecutor.executeScript("return exercise3(arguments[0]);", "good");
 
-    assertEquals("i hOpE YoU'Re hAvInG A gOoD DaY!", actual.trim());
+    Assertions.assertEquals("i hOpE YoU'Re hAvInG A gOoD DaY!", actual.trim());
   }
 
   @Test
   public void testForTemplateLiterals1() {
     String jsCode = TestingUtils.getContent().toLowerCase();
 
-    assertTrue(jsCode.contains("`hey ${"));
-    assertTrue(jsCode.contains("},`"));
+    Assertions.assertTrue(jsCode.contains("`hey ${"));
+    Assertions.assertTrue(jsCode.contains("},`"));
   }
 
   @Test
   public void testForTemplateLiterals2() {
     String jsCode = TestingUtils.getContent().toLowerCase();
 
-    assertTrue(jsCode.contains("`i just wanted to take"));
-    assertTrue(jsCode.contains("do it again soon.`"));
+    Assertions.assertTrue(jsCode.contains("`i just wanted to take"));
+    Assertions.assertTrue(jsCode.contains("do it again soon.`"));
   }
 
   @Test
   public void testForTemplateLiterals3() {
     String jsCode = TestingUtils.getContent().toLowerCase();
 
-    assertTrue(jsCode.contains("`i hope "));
-    assertTrue(jsCode.contains("day!`"));
+    Assertions.assertTrue(jsCode.contains("`i hope "));
+    Assertions.assertTrue(jsCode.contains("day!`"));
   }
 
   private void printEnvironmentInfo() {

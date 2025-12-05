@@ -1,0 +1,55 @@
+{
+  "type": "java",
+  "testFiles": [
+    {
+      "path": "src/test/java/SeleniumTest.java",
+      "testCases": [
+        {
+          "methodName": "testExercise1",
+          "label": "Verify exercise1 function with 'Bobby' input",
+          "description": "Executes exercise1 JavaScript function via WebDriver and asserts the returned greeting matches expected output."
+        },
+        {
+          "methodName": "testExercise1Again",
+          "label": "Verify exercise1 function with 'Charlie' input",
+          "description": "Executes exercise1 JavaScript function via WebDriver and asserts the returned greeting matches expected output."
+        },
+        {
+          "methodName": "testExercise2",
+          "label": "Verify exercise2 function with sample inputs",
+          "description": "Executes exercise2 JavaScript function via WebDriver and asserts that the returned text contains expected phrases."
+        },
+        {
+          "methodName": "testExercise2Again",
+          "label": "Verify exercise2 function with different inputs",
+          "description": "Executes exercise2 JavaScript function via WebDriver and asserts that the returned text contains expected phrases."
+        },
+        {
+          "methodName": "testExercise3",
+          "label": "Verify exercise3 function with 'fantastic' input",
+          "description": "Executes exercise3 JavaScript function via WebDriver and asserts the returned text matches the expected stylized output."
+        },
+        {
+          "methodName": "testExercise3Again",
+          "label": "Verify exercise3 function with 'good' input",
+          "description": "Executes exercise3 JavaScript function via WebDriver and asserts the returned text matches the expected stylized output."
+        },
+        {
+          "methodName": "testForTemplateLiterals1",
+          "label": "Check for template literals in JavaScript code",
+          "description": "Reads index.js content and asserts the presence of template literals syntax patterns."
+        },
+        {
+          "methodName": "testForTemplateLiterals2",
+          "label": "Check for specific template literal usage",
+          "description": "Reads index.js content and asserts the presence of a particular template literal phrase for exercise2."
+        },
+        {
+          "methodName": "testForTemplateLiterals3",
+          "label": "Check for template literal usage in exercise3",
+          "description": "Reads index.js content and asserts the presence of a particular template literal phrase for exercise3."
+        }
+      ]
+    }
+  ]
+}
